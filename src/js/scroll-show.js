@@ -96,14 +96,6 @@ function ScrollShow(selector, options) {
     };
 
     this.constructor = function() {
-        var elements = document.querySelectorAll(selector);
-        if (elements.length) {
-            for (var i = 0; i < elements.length; i++) {
-                elements[i].classList.add('scroll-show');
-            }
-        }
-        this.hideElements();
-
         // set transition parameters based on defaults
         this.stylesAfterShow.transitionDuration = this.config.duration + 'ms';
 
@@ -135,11 +127,21 @@ function ScrollShow(selector, options) {
             }
             if (options.slide == false) {
                 this.config.slide = options.slide;
+                delete this.stylesBeforeShow.transform;
+                delete this.stylesAfterShow.transform;
             }
             if (options.slideDistance) {
                 this.config.slideDistance = options.slideDistance;
             }
         }
+
+        var elements = document.querySelectorAll(selector);
+        if (elements.length) {
+            for (var i = 0; i < elements.length; i++) {
+                elements[i].classList.add('scroll-show');
+            }
+        }
+        this.hideElements();
 
         this.onScroll();
         window.addEventListener('scroll', this.onScroll.bind(this));
