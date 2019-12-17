@@ -1,1 +1,1 @@
-'src/js/scroll-show.js'
+'src/js/scroll-show.js';
