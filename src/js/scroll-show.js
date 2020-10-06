@@ -38,16 +38,13 @@ function ScrollShow(selector, options) {
   };
 
   this.throttle = function(callback, limit) {
-    var waiting = false; // Initially, we're not waiting
+    var waiting = false;
     return function() {
-      // We return a throttled function
       if (!waiting) {
-        // If we're not waiting
-        callback.apply(this, arguments); // Execute users function
-        waiting = true; // Prevent future invocations
+        callback.apply(this, arguments);
+        waiting = true;
         setTimeout(function() {
-          // After a period of time
-          waiting = false; // And allow future invocations
+          waiting = false;
         }, limit);
       }
     };
