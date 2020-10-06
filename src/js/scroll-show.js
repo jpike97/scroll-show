@@ -37,6 +37,22 @@ function ScrollShow(selector, options) {
     }
   };
 
+  this.throttle = function(callback, limit) {
+    var waiting = false; // Initially, we're not waiting
+    return function() {
+      // We return a throttled function
+      if (!waiting) {
+        // If we're not waiting
+        callback.apply(this, arguments); // Execute users function
+        waiting = true; // Prevent future invocations
+        setTimeout(function() {
+          // After a period of time
+          waiting = false; // And allow future invocations
+        }, limit);
+      }
+    };
+  };
+
   this.isElementVisible = function(element) {
     var windowBounds = {
         top: window.pageYOffset,
@@ -59,19 +75,6 @@ function ScrollShow(selector, options) {
         elementBounds.left < windowBounds.right) ||
       element.style.position === 'fixed'
     );
-  };
-
-  this.throttle = function(callback, limit) {
-    var waiting = false;
-    return function() {
-      if (!waiting) {
-        callback.apply(this, arguments);
-        waiting = true;
-        setTimeout(function() {
-          waiting = false;
-        }, limit);
-      }
-    };
   };
 
   this.onScroll = function() {
@@ -158,7 +161,7 @@ function ScrollShow(selector, options) {
     this.hideElements();
 
     this.onScroll();
-    window.addEventListener('scroll', this.onScroll.bind(this));
+    window.addEventListener('scroll', this.throttle(this.onScroll.bind(this), options.throttleDelay));
   };
 
   this.constructor();
