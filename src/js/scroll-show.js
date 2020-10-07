@@ -20,9 +20,10 @@ function ScrollShow(selector, options) {
     delay: 0,
     duration: 600,
     easing: 'cubic-bezier(0.5, 0, 0, 1)',
+    once: false,
     slide: true,
     slideDistance: '25px',
-    once: false
+    throttleDelay: 0
   };
 
   this.hideElements = function(elements) {
