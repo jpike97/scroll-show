@@ -20,9 +20,10 @@ function ScrollShow(selector, options) {
     delay: 0,
     duration: 600,
     easing: 'cubic-bezier(0.5, 0, 0, 1)',
+    once: false,
     slide: true,
     slideDistance: '25px',
-    once: false
+    throttleDelay: 0
   };
 
   this.hideElements = function(elements) {
@@ -147,6 +148,9 @@ function ScrollShow(selector, options) {
       if (options.slideDistance) {
         this.config.slideDistance = options.slideDistance;
       }
+      if (options.throttleDelay) {
+        this.config.throttleDelay = options.throttleDelay;
+      }
     }
 
     var elements = document.querySelectorAll(selector);
@@ -158,7 +162,7 @@ function ScrollShow(selector, options) {
     this.hideElements();
 
     this.onScroll();
-    window.addEventListener('scroll', this.throttle(this.onScroll.bind(this), options.throttleDelay));
+    window.addEventListener('scroll', this.throttle(this.onScroll.bind(this), this.config.throttleDelay));
   };
 
   this.constructor();
