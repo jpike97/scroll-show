@@ -37,6 +37,19 @@ function ScrollShow(selector, options) {
     }
   };
 
+  this.throttle = function(callback, limit) {
+    var waiting = false;
+    return function() {
+      if (!waiting) {
+        callback.apply(this, arguments);
+        waiting = true;
+        setTimeout(function() {
+          waiting = false;
+        }, limit);
+      }
+    };
+  };
+
   this.isElementVisible = function(element) {
     var windowBounds = {
         top: window.pageYOffset,
@@ -145,7 +158,7 @@ function ScrollShow(selector, options) {
     this.hideElements();
 
     this.onScroll();
-    window.addEventListener('scroll', this.onScroll.bind(this));
+    window.addEventListener('scroll', this.throttle(this.onScroll.bind(this), options.throttleDelay));
   };
 
   this.constructor();
