@@ -30,5 +30,5 @@ The first parameter of the function is ``selector`` and it takes any CSS selecto
 | `throttleDelay` | Number | `0` | Every scroll event is throttled meaning it may only fire once every so often to improve performance. This value is the delay (in milliseconds) between each scroll event firing. I recommend never setting a value over 250.
 
 ## Authors
-**Dave Maynard** - [GitHub](https://github.com/dmaynard24)\
-**Joey Pike** - [GitHub](https://github.com/jpike97)\
+**Dave Maynard** - [GitHub](https://github.com/dmaynard24)  
+**Joey Pike** - [GitHub](https://github.com/jpike97)
