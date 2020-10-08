@@ -1,7 +1,11 @@
 {
+  "editor.tabSize": 2,
   "editor.formatOnSave": true,
-  "[html]": {
+  "[markdown]": {
+    "editor.wordWrap": "on",
     "editor.formatOnSave": false
   },
-  "editor.tabSize": 2
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true
+  }
 }
