@@ -4,7 +4,9 @@
   "description": "show elements as they enter the viewport on scroll.",
   "main": "gulpfile.js",
   "scripts": {
-    "test": "gulp"
+    "test": "gulp",
+    "lint": "eslint %npm_package_options_src%/js/**/*.js --fix",
+    "format": "prettier %npm_package_options_src%/js/**/*.js --write"
   },
   "keywords": [
     "scroll",
@@ -13,13 +15,29 @@
   "author": "Sagepath Inc",
   "license": "ISC",
   "devDependencies": {
+    "@babel/core": "^7.8.0",
+    "@babel/preset-env": "^7.8.2",
+    "browser-sync": "^2.26.7",
     "del": "^3.0.0",
-    "gulp": "^3.9.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb": "^18.0.1",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-prettier": "^3.1.2",
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^5.0.0",
+    "gulp-babel": "^8.0.0-beta.2",
     "gulp-concat": "^2.6.1",
+    "gulp-plumber": "^1.2.1",
     "gulp-uglify": "^3.0.1",
-    "run-sequence": "^2.2.1",
-    "babel-core": "^6.26.3",
-    "babel-preset-env": "^1.7.0",
-    "gulp-babel": "^8.0.0"
+    "prettier": "^1.19.1"
+  },
+  "options": {
+    "src": "src",
+    "dist": "dist",
+    "js": {
+      "filename": "scroll-show.min"
+    }
   }
 }

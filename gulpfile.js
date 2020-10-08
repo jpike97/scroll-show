@@ -1,45 +1,62 @@
-var gulp = require('gulp'),
-  concat = require('gulp-concat'),
-  uglify = require('gulp-uglify'),
-  del = require('del'),
-  fs = require('fs'),
-  runSequence = require('run-sequence');
+const { src, dest, watch, series, parallel } = require(`gulp`);
+const concat = require(`gulp-concat`);
+const uglify = require(`gulp-uglify`);
+const babel = require(`gulp-babel`);
+const fs = require(`fs`);
+const del = require(`del`);
+const plumber = require(`gulp-plumber`);
+const { options } = require(`./package.json`);
 
-/* --------------------------- development process for building ---------------------------------  */
-gulp.task('default', function(callback) {
-  runSequence('clean:dist', ['js', 'watch'], callback);
-});
+function cleanDist(callback) {
+  del.sync(`${options.dist}`, { force: true });
 
-/* minifies scroll-show.js and moves it */
-gulp.task('js', function() {
-  var partials = fs.readFileSync('src/js/scripts.js', 'utf-8');
-  arrPartials = partials.replace(/["';]/g, '').split(/\r?\n/);
+  callback();
+}
+
+function moveJs() {
+  const partials = fs.readFileSync(`${options.src}/js/scripts.js`, `utf-8`);
+  arrPartials = partials.replace(/["']/g, ``).split(/\r?\n/);
   // remove empty lines
-  for (var i = 0; i < arrPartials.length; i++) {
-    if (arrPartials[i] == '' || arrPartials[i] == undefined) {
+  for (let i = 0; i < arrPartials.length; i++) {
+    const partialName = arrPartials[i];
+    if (partialName === `` || partialName === undefined) {
       arrPartials.splice(i, 1);
       i--;
+    } else {
+      // prepend src to each path
+      arrPartials[i] = `${options.src}/${partialName}`;
     }
   }
 
-  return (
-    gulp
-      .src(arrPartials)
-      .pipe(concat('scroll-show.min.js'))
-      // .pipe(babel({
-      //     presets: ['env']
-      // }))
-      .pipe(uglify())
-      .pipe(gulp.dest('dist/'))
-  );
-});
+  return src(arrPartials)
+    .pipe(
+      plumber({
+        errorHandler(error) {
+          const err = `JavaScript error: ${error.message}`;
+          /* eslint-disable-next-line */
+          console.log(err);
+        },
+      }),
+    )
+    .pipe(
+      babel({
+        presets: [`@babel/env`],
+      }),
+    )
+    .pipe(concat(`${options.js.filename}.js`))
+    .pipe(uglify())
+    .pipe(dest(`${options.dist}/`));
+}
 
-/* watchers to help browser sync auto reload */
-gulp.task('watch', ['js'], function() {
-  gulp.watch('src/js/**/*.js', ['js']);
-});
+function watchFiles(callback) {
+  watch([`${options.src}/js/**/*.js`], moveJs);
 
-/* cleans out folder */
-gulp.task('clean:dist', function() {
-  return del.sync('dist', { force: true });
-});
+  callback();
+}
+
+exports.cleanDist = cleanDist;
+exports.moveJs = moveJs;
+
+exports.default = series(cleanDist, parallel(moveJs, watchFiles));
+
+exports.release = series(cleanDist, moveJs);
