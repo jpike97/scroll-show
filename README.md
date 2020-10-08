@@ -29,5 +29,6 @@ The first parameter of the ScrollShow function is ``selector`` and it takes any 
 | `slideDistance` | String | `25px` | How far the element will "slide" into place as it's being shown. This property is dependent on the **slide** property being set to **true**.
 | `throttleDelay` | Number | `0` | Every scroll event is throttled meaning it may only fire once every so often to improve performance. This value is the delay (in milliseconds) between each scroll event firing. I recommend never setting a value over 250.
 
-## Author
+## Authors
 **Dave Maynard** - [GitHub](https://github.com/dmaynard24)
+**Joey Pike** - [GitHub](https://github.com/jpike97)
