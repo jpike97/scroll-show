@@ -4,18 +4,19 @@ Show elements as they enter the browser viewport on scroll.
 ## Getting Started
 To get up and running quickly, download the <a id="raw-url" href="https://raw.githubusercontent.com/dmaynard24/scroll-show/master/dist/scroll-show.min.js" download>minified script</a> and add it to any page.
 
-    ``<script src="path/to/script/scroll-show.min.js" type="text/javascript"></script>``
+    <script src="path/to/script/scroll-show.min.js" type="text/javascript"></script>
 
-Then, below the script, initialize it:
+Then, after loading the script, initialize it:
 
     <script type="text/javascript">
 	    const scrollShow = new ScrollShow(`.scroll-show-component`, {
 		    duration: 850,
-		    slide: true,
 		    slideDistance: `10px`,
 		    once: true,
 	    });
     </script>
+
+The first parameter of the ScrollShow function is ``selector`` and it takes any CSS selector as an argument. The second parameter of the ScrollShow function is ``options`` and it takes an object as an argument. In the example above I'm overriding some of the default option values, but you may omit any of them to simply use the defaults.
 
 ## Options
 | Key | Value Type | Default Value | Description |
