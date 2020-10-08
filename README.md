@@ -2,7 +2,7 @@
 Show elements as they enter the browser viewport on scroll.
 
 ## Getting Started
-To get up and running quickly, download the <a id="raw-url" href="https://raw.githubusercontent.com/dmaynard24/scroll-show/master/dist/scroll-show.min.js" download>minified script</a> and add it to any page.
+To get up and running quickly, download the [minified script](https://raw.githubusercontent.com/dmaynard24/scroll-show/master/dist/scroll-show.min.js) and add it to any page.
 
     <script src="path/to/script/scroll-show.min.js" type="text/javascript"></script>
 
