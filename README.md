@@ -16,11 +16,11 @@ Then, after loading the script, initialize it:
 	    });
     </script>
 
-The first parameter of the ScrollShow function is ``selector`` and it takes any CSS selector as an argument. The second parameter of the ScrollShow function is ``options`` and it takes an object as an argument. In the example above I'm overriding some of the default option values, but you may omit any of them to simply use the defaults.
+The first parameter of the function is ``selector`` and it takes any CSS selector as an argument. The second parameter is ``options`` and it takes an object as an argument. In the example above I'm overriding some of the default option values, but you may omit any of them to simply use the defaults.
 
 ## Options
 | Key | Value Type | Default Value | Description |
-|--|--|--|--|
+|:-|:-|:-|:-|
 | `delay` | Number | `0` | Delay (in milliseconds) before the element will be shown after entering the browser viewport. 
 | `duration` | Number | `600` | Duration (in milliseconds) of the animation to show the element. 
 | `easing` | String | `cubic-bezier(0.5, 0, 0, 1)` | Duration (in milliseconds) of the animation to show the element. 
